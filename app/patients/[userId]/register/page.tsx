@@ -1,4 +1,3 @@
-import * as Sentry from "@sentry/nextjs";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
@@ -8,8 +7,6 @@ import { getPatient, getUser } from "@/lib/actions/patient.actions";
 const Register = async ({ params: { userId } }: SearchParamProps) => {
   const user = await getUser(userId);
   const patient = await getPatient(userId);
-
-  Sentry.metrics.set("user_view_register", user.name);
 
   if (patient) redirect(`/patients/${userId}/new-appointment`);
 
